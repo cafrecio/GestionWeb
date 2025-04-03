@@ -1,16 +1,33 @@
-@extends('adminlte::page')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('title', 'Gestión Web')</title>
 
-@section('title', 'Sistema de Gestión')
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+    
+    @stack('styles')
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        @include('layouts.navbar')
+        @include('layouts.sidebar')
 
-@section('content')
-    {{ $slot }}
-@stop
+        <div class="content-wrapper">
+            <section class="content">
+                <div class="container-fluid">
+                    @yield('content')
+                </div>
+            </section>
+        </div>
 
-@section('css')
-    @vite(['resources/css/app.css'])
-@stop
+        @include('layouts.footer')
+    </div>
 
-@section('js')
-    @vite(['resources/js/app.js'])
-@stop
-
+    <!-- Scripts -->
+    <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+    @stack('scripts')
+</body>
+</html>
