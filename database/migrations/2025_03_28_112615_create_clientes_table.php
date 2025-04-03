@@ -12,7 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clientes', function (Blueprint $table) {
-            $table->id();
+            $table->string('codigoCli')->primary();
+            $table->string('cuitCli');
+            $table->date('fechaAltaCli');
+            $table->date('fechaUltimaFacCli')->nullable();
+            $table->string('razonSocialBusCli');
+            $table->string('razonSocialCli');
+            $table->string('estadoCli');
+            $table->string('nombreVendedor');
+            $table->boolean('entregamos')->default(false);
             $table->timestamps();
         });
     }

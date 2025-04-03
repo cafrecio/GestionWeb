@@ -13,7 +13,24 @@ return new class extends Migration
     {
         Schema::create('sucursales', function (Blueprint $table) {
             $table->id();
+            $table->string('cliente_id');
+            $table->string('nombre');
+            $table->text('direccion');
+            
+            // Error original: Columna mal nombrada
+            $table->unsignedBigInteger('localidade_id'); // ← Nombre correcto
+            
+            $table->foreign('localidade_id') // ← Coincide con el nombre de la columna
+                  ->references('id')
+                  ->on('localidades')
+                  ->onDelete('cascade');
+            
+            $table->boolean('retira_local')->default(false);
             $table->timestamps();
+            
+            $table->foreign('cliente_id')
+                  ->references('codigoCli')
+                  ->on('clientes');
         });
     }
 

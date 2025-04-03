@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('contactos', function (Blueprint $table) {
             $table->id();
+            $table->string('cliente_id');
+            $table->foreignId('tipo_contacto_id')->constrained('tipo_contactos');
+            $table->string('nombre');
+            $table->string('apellido')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('celular')->nullable();
+            $table->string('email');
             $table->timestamps();
+            
+            $table->foreign('cliente_id')->references('codigoCli')->on('clientes');
         });
     }
 

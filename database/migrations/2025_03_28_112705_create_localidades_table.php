@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('localidades', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('provincia_id')->constrained();
+            $table->foreignId('zona_id')->constrained();
+            $table->string('nombre');
+            $table->string('codigo_postal')->nullable();
             $table->timestamps();
         });
     }

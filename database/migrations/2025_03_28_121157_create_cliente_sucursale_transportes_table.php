@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('cliente_sucursale_transportes', function (Blueprint $table) {
             $table->id();
+            $table->string('cliente_id');
+            $table->foreignId('sucursal_id')->constrained('sucursales');
+            $table->foreignId('sucursal_transporte_id')->constrained('sucursal_transportes');
+            $table->boolean('activo')->default(true);
             $table->timestamps();
+            
+            $table->foreign('cliente_id')->references('codigoCli')->on('clientes');
         });
     }
 
