@@ -26,12 +26,12 @@ class ProvinciaController extends Controller
 
         Provincia::create($request->all());
 
-        return redirect()->route('provincias.index')->with('success', 'Provincia creada correctamente.');
+        return redirect()->route('configuracion.provincias.index')->with('success', 'Provincia creada correctamente.');
     }
 
     public function edit(Provincia $provincia)
     {
-        return view('provincias.edit', compact('provincia'));
+        return view('configuracion.provincias.edit', compact('provincia'));
     }
 
     public function update(Request $request, Provincia $provincia)
@@ -42,14 +42,14 @@ class ProvinciaController extends Controller
 
         $provincia->update($request->all());
 
-        return redirect()->route('provincias.index')->with('success', 'Provincia actualizada correctamente.');
+        return redirect()->route('configuracion.provincias.index')->with('success', 'Provincia actualizada correctamente.');
     }
 
     public function destroy(Provincia $provincia)
     {
         $provincia->delete();
 
-        return redirect()->route('provincias.index')->with('success', 'Provincia eliminada correctamente.');
+        return redirect()->route('configuracion.provincias.index')->with('success', 'Provincia eliminada correctamente.');
     }
 }
 

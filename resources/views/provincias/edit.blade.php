@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('provincias.update', $provincia) }}" method="POST">
+            <form action="{{ route('configuracion.provincias.update', $provincia) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -17,7 +17,7 @@
                     <input type="text" name="nombre" class="form-control" value="{{ $provincia->nombre }}" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Actualizar</button>
-                <a href="{{ route('provincias.index') }}" class="btn btn-secondary">Cancelar</a>
+                <a href="{{ route('configuracion.provincias.index') }}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>

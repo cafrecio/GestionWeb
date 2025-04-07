@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('provincias.create') }}" class="btn btn-primary">Agregar Provincia</a>
+            <a href="{{ route('configuracion.provincias.create') }}" class="btn btn-primary">Agregar Provincia</a>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
@@ -26,8 +26,8 @@
                             <td>{{ $provincia->id }}</td>
                             <td>{{ $provincia->nombre }}</td>
                             <td>
-                                <a href="{{ route('provincias.edit', $provincia) }}" class="btn btn-warning btn-sm">Editar</a>
-                                <form action="{{ route('provincias.destroy', $provincia) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('configuracion.provincias.edit', $provincia) }}" class="btn btn-warning btn-sm">Editar</a>
+                                <form action="{{ route('configuracion.provincias.destroy', $provincia) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro?')">Eliminar</button>

@@ -1,28 +1,43 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProvinciaController;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-
-// Grupo de rutas para "Configuración General"
-Route::prefix('configuracion-general')->middleware(['auth'])->group(function () {
-    // Rutas de provincias
-    Route::resource('provincias', ProvinciaController::class);
-
-    // Control de perfiles (comentado por ahora)
-    // Route::middleware(['role:admin'])->group(function () {
-    //     Route::resource('provincias', ProvinciaController::class);
-    // });
-});
-
-// Ruta de inicio (puedes personalizarla según tu necesidad)
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Dashboard (requiere login y verificación)
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+// Grupo de rutas que requieren login
+Route::middleware('auth')->group(function () {
 
-Auth::routes();
+    // Perfil de usuario
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // 🔐 CONFIGURACIÓN GENERAL
+    Route::prefix('configuracion')->group(function () {
+
+        // Provincias
+        Route::resource('provincias', ProvinciaController::class)
+            ->names('configuracion.provincias');
+        
+        // Redirección a dashboard
+        Route::get('/home', function () {
+            return redirect()->route('dashboard');
+        })->name('home');
+    
+        // ✅ TEST: Ruta independiente
+        Route::get('/test', function () {
+            return view('test');
+        });
+    });
+});
+
+require __DIR__.'/auth.php';
